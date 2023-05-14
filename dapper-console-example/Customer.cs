@@ -1,7 +1,11 @@
-﻿namespace DapperConsoleExample
+﻿using Dapper.Contrib.Extensions;
+
+namespace DapperConsoleExample
 {
+  [Table("SalesLT.Customer")]
   public class Customer
   {
+    [Key]
     public int CustomerID { get; set; }
     public bool NameStyle { get; set; }
     public string? Title { get; set; }

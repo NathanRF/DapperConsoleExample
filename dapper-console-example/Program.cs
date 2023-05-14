@@ -1,17 +1,10 @@
-﻿
-using Dapper;
-using DapperConsoleExample;
-using System.Data;
-using System.Data.SqlClient;
+﻿using DapperConsoleExample;
 
-const string connectionString = "Server=localhost;Database=AdventureWorksLT2019;Trusted_Connection=True;";
+const string connectionString = "Data Source=(localdb)\\ProjectModels;Database=AdventureWorksLT2019;Integrated Security = True;Trusted_Connection=True;";
 
-await using (SqlConnection connection = new(connectionString))
+using (var db = new CustomerRepository(connectionString))
+
+foreach (var customer in await db.SelectCustomer())
 {
-  connection.Open();
-  var customers = connection.Query<Customer>("select * from SalesLT.Customer (nolock)");
-  foreach (var customer in customers)
-  {
-    Console.WriteLine(customer.FirstName + " - " + customer.EmailAddress);
-  }
+  Console.WriteLine(customer.FirstName + " - " + customer.EmailAddress);
 }

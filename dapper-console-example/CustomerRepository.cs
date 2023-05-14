@@ -18,106 +18,106 @@ namespace DapperConsoleExample
     public async Task<IEnumerable<Customer>> SelectCustomer()
     {
       const string sql = @"
-					SELECT CustomerID
-						,NameStyle
-						,Title
-						,FirstName
-						,MiddleName
-						,LastName
-						,Suffix
-						,CompanyName
-						,SalesPerson
-						,EmailAddress
-						,Phone
-						,PasswordHash
-						,PasswordSalt
-						,Rowguid
-						,ModifiedDate
-					FROM SalesLT.[Customer]";
+          SELECT CustomerID
+            ,NameStyle
+            ,Title
+            ,FirstName
+            ,MiddleName
+            ,LastName
+            ,Suffix
+            ,CompanyName
+            ,SalesPerson
+            ,EmailAddress
+            ,Phone
+            ,PasswordHash
+            ,PasswordSalt
+            ,Rowguid
+            ,ModifiedDate
+          FROM SalesLT.[Customer]";
       return await _db.QueryAsync<Customer>(sql, commandType: CommandType.Text);
     }
     public async Task<Customer> SelectCustomerById(int id)
     {
       const string sql = @"
-					SELECT CustomerID
-						,NameStyle
-						,Title
-						,FirstName
-						,MiddleName
-						,LastName
-						,Suffix
-						,CompanyName
-						,SalesPerson
-						,EmailAddress
-						,Phone
-						,PasswordHash
-						,PasswordSalt
-						,Rowguid
-						,ModifiedDate
-					FROM SalesLT.[Customer]
-					WHERE CustomerID = @id";
+          SELECT CustomerID
+            ,NameStyle
+            ,Title
+            ,FirstName
+            ,MiddleName
+            ,LastName
+            ,Suffix
+            ,CompanyName
+            ,SalesPerson
+            ,EmailAddress
+            ,Phone
+            ,PasswordHash
+            ,PasswordSalt
+            ,Rowguid
+            ,ModifiedDate
+          FROM SalesLT.[Customer]
+          WHERE CustomerID = @id";
 
       return await _db.QueryFirstOrDefaultAsync<Customer>(sql, new { id }, commandType: CommandType.Text);
     }
     public async Task<int> InsertCustomer(Customer customer)
     {
       const string sql = @"
-					INSERT INTO SalesLT.[Customer] (
-						NameStyle
-						,Title
-						,FirstName
-						,MiddleName
-						,LastName
-						,Suffix
-						,CompanyName
-						,SalesPerson
-						,EmailAddress
-						,Phone
-						,PasswordHash
-						,PasswordSalt
-						,Rowguid
-						,ModifiedDate
-						)
-					VALUES (
-						@NameStyle
-						,@Title
-						,@FirstName
-						,@MiddleName
-						,@LastName
-						,@Suffix
-						,@CompanyName
-						,@SalesPerson
-						,@EmailAddress
-						,@Phone
-						,@PasswordHash
-						,@PasswordSalt
-						,@Rowguid
-						,@ModifiedDate
-						);
+          INSERT INTO SalesLT.[Customer] (
+            NameStyle
+            ,Title
+            ,FirstName
+            ,MiddleName
+            ,LastName
+            ,Suffix
+            ,CompanyName
+            ,SalesPerson
+            ,EmailAddress
+            ,Phone
+            ,PasswordHash
+            ,PasswordSalt
+            ,Rowguid
+            ,ModifiedDate
+            )
+          VALUES (
+            @NameStyle
+            ,@Title
+            ,@FirstName
+            ,@MiddleName
+            ,@LastName
+            ,@Suffix
+            ,@CompanyName
+            ,@SalesPerson
+            ,@EmailAddress
+            ,@Phone
+            ,@PasswordHash
+            ,@PasswordSalt
+            ,@Rowguid
+            ,@ModifiedDate
+            );
 
-					SELECT @@IDENTITY;";
+          SELECT @@IDENTITY;";
 
       return await _db.QueryFirstOrDefaultAsync<int>(sql, new { NameStyle = customer.NameStyle, Title = customer.Title, FirstName = customer.FirstName, MiddleName = customer.MiddleName, LastName = customer.LastName, Suffix = customer.Suffix, CompanyName = customer.CompanyName, SalesPerson = customer.SalesPerson, EmailAddress = customer.EmailAddress, Phone = customer.Phone, PasswordHash = customer.PasswordHash, PasswordSalt = customer.PasswordSalt, Rowguid = customer.Rowguid, ModifiedDate = customer.ModifiedDate }, commandType: CommandType.Text);
     }
     public async Task UpdateCustomer(Customer customer)
     {
       const string sql = @"
-					UPDATE SalesLT.[Customer]
-					SET NameStyle = @NameStyle
-						,Title = @Title
-						,FirstName = @FirstName
-						,MiddleName = @MiddleName
-						,LastName = @LastName
-						,Suffix = @Suffix
-						,CompanyName = @CompanyName
-						,SalesPerson = @SalesPerson
-						,EmailAddress = @EmailAddress
-						,Phone = @Phone
-						,PasswordHash = @PasswordHash
-						,PasswordSalt = @PasswordSalt
-						,Rowguid = @Rowguid
-						,ModifiedDate = @ModifiedDate
-					WHERE NameStyle = @NameStyle";
+          UPDATE SalesLT.[Customer]
+          SET NameStyle = @NameStyle
+            ,Title = @Title
+            ,FirstName = @FirstName
+            ,MiddleName = @MiddleName
+            ,LastName = @LastName
+            ,Suffix = @Suffix
+            ,CompanyName = @CompanyName
+            ,SalesPerson = @SalesPerson
+            ,EmailAddress = @EmailAddress
+            ,Phone = @Phone
+            ,PasswordHash = @PasswordHash
+            ,PasswordSalt = @PasswordSalt
+            ,Rowguid = @Rowguid
+            ,ModifiedDate = @ModifiedDate
+          WHERE NameStyle = @NameStyle";
 
       await _db.ExecuteAsync(sql, new { NameStyle = customer.NameStyle, Title = customer.Title, FirstName = customer.FirstName, MiddleName = customer.MiddleName, LastName = customer.LastName, Suffix = customer.Suffix, CompanyName = customer.CompanyName, SalesPerson = customer.SalesPerson, EmailAddress = customer.EmailAddress, Phone = customer.Phone, PasswordHash = customer.PasswordHash, PasswordSalt = customer.PasswordSalt, Rowguid = customer.Rowguid, ModifiedDate = customer.ModifiedDate }, commandType: CommandType.Text);
     }

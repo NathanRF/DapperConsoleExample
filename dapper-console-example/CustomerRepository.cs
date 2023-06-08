@@ -18,7 +18,16 @@ namespace DapperConsoleExample
 
     public async Task<IEnumerable<Customer>> SelectCustomer()
     {
-      return await _db.GetAllAsync<Customer>();
+      string sql =
+        @"SELECT *
+          FROM [SalesLT].[Customer] C
+          JOIN [SalesLT].[CustomerAddress] CA
+            ON CA.CustomerID = C.CustomerID";
+      return await _db.QueryAsync<Customer, CustomerAddress, Customer>(sql,
+        (customer, address) => {
+          customer.CustomerAddress = address;
+          return customer;
+        }, splitOn: "CustomerID");
     }
     public async Task<Customer> SelectCustomerById(int id)
     {

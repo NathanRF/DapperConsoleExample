@@ -2,7 +2,7 @@
 
 namespace DapperConsoleExample
 {
-  [Table("SalesLT.Customer")]
+  [Table("SalesLT_Customer")]
   public class Customer : AdventureWorksBase
   {
     [Key]
@@ -19,6 +19,8 @@ namespace DapperConsoleExample
     public string? Phone { get; set; }
     public string? PasswordHash { get; set; }
     public string? PasswordSalt { get; set; }
+
+    [Write(false)]
     public CustomerAddress? CustomerAddress { get; set; }
   }
 

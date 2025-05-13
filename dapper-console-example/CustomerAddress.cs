@@ -2,7 +2,7 @@
 
 namespace DapperConsoleExample;
 
-[Table("SalesLT.CustomerAddress")]
+[Table("SalesLT_CustomerAddress")]
 public class CustomerAddress : AdventureWorksBase
 {
     public int CustomerID { get; set; }

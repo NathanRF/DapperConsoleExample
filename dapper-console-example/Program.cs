@@ -1,9 +1,11 @@
 ﻿using DapperConsoleExample;
 
-const string connectionString = "Data Source=(localdb)\\ProjectModels;Database=AdventureWorksLT2019;Integrated Security = True;Trusted_Connection=True;";
+const string connectionString = "Data Source=DapperConsoleExample.db";
 
 await using (var db = new CustomerRepository(connectionString))
 {
+  await db.Init();
+
   var customers = await db.SelectCustomer();
 
   var exampleCustomer = customers.First();

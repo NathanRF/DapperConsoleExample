@@ -62,7 +62,7 @@ namespace DapperConsoleExample
         {
           customer.CustomerAddress = address;
           return customer;
-        }, splitOn: "AddressID"); //TODO columns with the same name might be conflicting
+        }, splitOn: "AddressID");
     }
     public async Task<Customer> SelectCustomerById(int id)
     {
